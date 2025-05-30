@@ -1,0 +1,33 @@
+/* src/index.css */
+
+/* Reset cơ bản và thiết lập font toàn cục */
+html,
+body,
+#root {
+  height: 100%; /* Quan trọng: cho phép #root (nơi App React render) chiếm full chiều cao */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Tính toán padding và border vào kích thước tổng của element */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; /* Kế thừa box-sizing từ trên */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.6;
+  background-color: #f0f2f5; /* Màu nền xám nhẹ cho bên ngoài app */
+  color: #333; /* Màu chữ mặc định */
+  -webkit-font-smoothing: antialiased; /* Làm chữ mượt hơn trên Webkit (Chrome, Safari) */
+  -moz-osx-font-smoothing: grayscale; /* Làm chữ mượt hơn trên Firefox */
+}
+
+/* Đảm bảo #root cũng chiếm full chiều cao */
+#root {
+  display: flex; /* Giúp .chat-app-container bên trong có thể chiếm full height 100% dễ dàng */
+  flex-direction: column;
+}

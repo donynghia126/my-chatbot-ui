@@ -1,0 +1,239 @@
+/* src/App.css - Đã được sắp xếp lại cho gọn gàng hơn */
+
+/* ---- Main App Layout ---- */
+.chat-app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.app-header {
+  padding: 16px 24px;
+  z-index: 10;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */ /* Tùy chọn */
+}
+
+/* ---- Chat Window & Scrollbar ---- */
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 18px;
+  padding: 24px;
+  overflow-y: auto;
+  background-color: #f7f9fc;
+}
+
+/* Custom scrollbar (Webkit browsers) */
+.chat-window::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-window::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.chat-window::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 10px;
+}
+.chat-window::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* ---- Message Bubbles ---- */
+.message-bubble {
+  position: relative;
+  max-width: 75%;
+  padding: 12px 20px;
+  word-wrap: break-word;
+  line-height: 1.5;
+  border-radius: 22px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+}
+
+/* Styles for text content within any message bubble */
+.message-bubble .sender-name {
+  /* Class cho thẻ p chứa tên người gửi */
+  margin: 0 0 5px 0; /* Bỏ margin top, thêm margin bottom */
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.8;
+  display: block; /* Đảm bảo tên luôn ở trên */
+}
+
+.user-message {
+  align-self: flex-end;
+  color: white;
+  background-color: #007bff;
+  border-bottom-right-radius: 6px;
+}
+.user-message .sender-name strong {
+  /* Tên "Sếp" */
+  color: #e0e0e0;
+}
+
+.ai-message {
+  align-self: flex-start;
+  color: #2c3e50;
+  background-color: #eef1f5;
+  border-bottom-left-radius: 6px;
+}
+.ai-message .sender-name strong {
+  /* Tên "Gemini" */
+  color: #007bff;
+}
+
+/* Loading message style */
+.ai-message em {
+  font-style: normal;
+  opacity: 0.7;
+}
+
+/* ---- Message Input Form ---- */
+.message-input-form {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid #e7e7e7;
+  background-color: #ffffff;
+  /* box-shadow: 0 -2px 5px rgba(0,0,0,0.03); */ /* Tùy chọn */
+}
+
+.message-input-form textarea {
+  flex-grow: 1;
+  min-height: 50px; /* ~1 dòng + padding */
+  max-height: 150px; /* ~4-5 dòng */
+  margin-right: 12px;
+  padding: 14px 20px;
+  overflow-y: auto;
+  resize: none;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid #dbe0e4;
+  border-radius: 24px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.message-input-form textarea::placeholder {
+  color: #909da7;
+}
+.message-input-form textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.message-input-form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 50px;
+  padding: 0 20px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 24px;
+  background-image: linear-gradient(135deg, #007bff 0%, #0069d9 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-image 0.2s ease, transform 0.1s ease;
+}
+.message-input-form button:hover:not(:disabled) {
+  background-image: linear-gradient(135deg, #0069d9 0%, #0056b3 100%);
+  transform: translateY(-1px);
+}
+.message-input-form button:active:not(:disabled) {
+  transform: translateY(0px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.message-input-form button:disabled {
+  background-image: none;
+  background-color: #c5d9ed;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ---- Markdown Content Styling ---- */
+.markdown-content {
+  /* Class bọc ReactMarkdown component */
+  /* Thuộc tính white-space: pre-line sẽ được áp dụng cho các thẻ p bên trong nó nếu cần */
+}
+
+.markdown-content p {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  white-space: pre-line; /* Đảm bảo xuống dòng cho text thường và text trong Markdown */
+}
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content strong {
+  font-weight: bold;
+}
+
+.markdown-content em {
+  font-style: italic;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 25px; /* Tăng padding cho dễ nhìn hơn */
+}
+
+.markdown-content li {
+  margin-bottom: 0.3em; /* Tăng nhẹ khoảng cách */
+}
+
+.markdown-content code {
+  /* Inline code */
+  padding: 0.2em 0.4em;
+  margin: 0 2px; /* Thêm margin nhẹ */
+  font-size: 0.875em; /* Chỉnh lại size */
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+  background-color: rgba(27, 31, 35, 0.07); /* Màu nền nhẹ nhàng hơn */
+  border-radius: 4px;
+}
+
+.markdown-content pre {
+  /* Code block */
+  padding: 16px;
+  margin-top: 0.5em;
+  margin-bottom: 1em; /* Tăng margin bottom */
+  overflow: auto;
+  font-size: 0.875em;
+  line-height: 1.45;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+  background-color: #282c34; /* Nền tối hơn, phổ biến cho code block */
+  color: #abb2bf; /* Màu chữ dễ đọc trên nền tối */
+  border-radius: 6px;
+  white-space: pre; /* Giữ nguyên khoảng trắng và không tự xuống dòng */
+}
+
+.markdown-content pre code {
+  /* Reset style cho code bên trong pre */
+  display: inline; /* Đảm bảo nó không bị ảnh hưởng bởi style .markdown-content code ở trên */
+  padding: 0;
+  margin: 0;
+  font-size: inherit; /* Kế thừa font size từ pre */
+  font-family: inherit; /* Kế thừa font family */
+  background-color: transparent;
+  color: inherit;
+  border-radius: 0;
+  word-wrap: normal; /* Tránh wrap không cần thiết */
+}
