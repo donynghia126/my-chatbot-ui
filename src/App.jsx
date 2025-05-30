@@ -10,6 +10,7 @@ function App() {
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef(null);
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000"; // Fallback cho dev
 
   // Dọn dẹp state không dùng đến từ phần streaming
   // const [streamingAiMessage, setStreamingAiMessage] = useState(""); // Bỏ
@@ -46,7 +47,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/chat", {
+      const response = await axios.post(`${API_BASE_URL}/api/v1/chat`, {
         chatSession: currentChatSession,
       });
 
