@@ -1,33 +1,141 @@
 /* src/index.css */
 
-/* Reset cơ bản và thiết lập font toàn cục */
+:root {
+  /* Mặc định là Light Theme */
+  --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+
+  /* === Light Theme Colors === */
+  --bg-page: #f0f4f8; /* Nền ngoài app rất nhạt */
+  --text-primary: #1f2937; /* Chữ chính (xám đậm) */
+  --text-secondary: #4b5563; /* Chữ phụ (xám vừa) */
+  --text-placeholder: #6b7280; /* Chữ placeholder */
+  --text-on-accent: #ffffff; /* Chữ trên nền màu nhấn (vd: nút) */
+
+  --bg-app-container: #ffffff; /* Nền app chính (trắng) */
+  --header-border: #e5e7eb; /* Viền header (xám rất nhạt) */
+
+  --bubble-user-bg: #3b82f6; /* Bubble User (xanh dương) */
+  --bubble-user-text: #ffffff; /* Chữ trong bubble User */
+  --bubble-ai-bg: #e5e7eb; /* Bubble AI (xám nhạt) */
+  --bubble-ai-text: #1f2937; /* Chữ trong bubble AI */
+
+  --input-bg: #ffffff; /* Nền ô input */
+  --input-text: #1f2937; /* Chữ trong ô input */
+  --input-border: #d1d5db; /* Viền ô input */
+  --input-focus-border: #3b82f6; /* Viền focus (xanh dương) */
+  --input-focus-shadow: rgba(59, 130, 246, 0.15); /* Bóng mờ focus */
+
+  --button-bg: #3b82f6; /* Nền nút (xanh dương) */
+  --button-text: #ffffff; /* Chữ trên nút */
+  --button-hover-bg: #2563eb; /* Nền nút khi hover */
+  --button-active-bg: #1d4ed8; /* Nền nút khi active */
+  --button-disabled-text: #9ca3af; /* Chữ nút khi disabled */
+  --button-disabled-bg: #e5e7eb; /* Nền nút khi disabled */
+
+  --select-bg: #f9fafb; /* Nền select box */
+  --select-text: #1f2937; /* Chữ select box */
+  --select-border: #d1d5db; /* Viền select box */
+  --select-focus-border: #3b82f6; /* Viền select focus */
+  --select-focus-shadow: rgba(59, 130, 246, 0.15); /* Bóng mờ select focus */
+
+  --scrollbar-track-bg: #f3f4f6; /* Nền thanh cuộn */
+  --scrollbar-thumb-bg: #d1d5db; /* Con trượt thanh cuộn */
+  --scrollbar-thumb-hover-bg: #9ca3af; /* Con trượt khi hover */
+
+  /* Markdown Light Theme Colors */
+  --markdown-strong-text: #111827; /* Chữ strong (đậm hơn text thường) */
+  --markdown-em-text: #374151; /* Chữ em (nghiêng) */
+  --markdown-list-marker: #6b7280; /* Dấu đầu dòng list */
+  --markdown-code-inline-bg: #f3f4f6; /* Nền code inline */
+  --markdown-code-inline-text: #1f2937; /* Chữ code inline */
+  --markdown-code-inline-border: #e5e7eb; /* Viền code inline */
+  --markdown-code-block-bg: #1f2937; /* Nền code block (giữ tối cho dễ nhìn code) */
+  --markdown-code-block-text: #f3f4f6; /* Chữ code block */
+  --markdown-code-block-border: #374151; /* Viền code block */
+}
+
+/* === Dark Theme Colors (Ghi đè các biến trong :root khi data-theme="dark") === */
+html[data-theme="dark"] {
+  --bg-page: #131314;
+  --text-primary: #e8eaed;
+  --text-secondary: #bdc1c6;
+  --text-placeholder: #9aa0a6;
+  --text-on-accent: #e8eaed; /* Chữ trên nền màu nhấn (cho user bubble) */
+
+  --bg-app-container: #202124;
+  --header-border: #3c4043;
+
+  --bubble-user-bg: #3b82f6; /* Giữ nguyên màu xanh hoặc có thể đổi sang xanh sáng hơn */
+  --bubble-user-text: #e8eaed;
+  --bubble-ai-bg: #303134;
+  --bubble-ai-text: #e8eaed;
+
+  --input-bg: #303134;
+  --input-text: #e8eaed;
+  --input-border: #5f6368;
+  --input-focus-border: #89b4fa;
+  --input-focus-shadow: rgba(137, 180, 250, 0.15);
+
+  --button-bg: #303134; /* Hoặc một màu accent khác nếu muốn */
+  --button-text: #e8eaed;
+  --button-hover-bg: #5f6368;
+  --button-active-bg: #3c4043;
+  --button-disabled-text: #5f6368;
+  --button-disabled-bg: #303134; /* Giữ nguyên nền, chỉ mờ chữ */
+
+  --select-bg: #303134;
+  --select-text: #e8eaed;
+  --select-border: #5f6368;
+  --select-focus-border: #89b4fa;
+  --select-focus-shadow: rgba(137, 180, 250, 0.15);
+
+  --scrollbar-track-bg: rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb-bg: #5f6368;
+  --scrollbar-thumb-hover-bg: #9aa0a6;
+
+  /* Markdown Dark Theme Colors */
+  --markdown-strong-text: #f1f3f4;
+  --markdown-em-text: #dadce0;
+  --markdown-list-marker: #9aa0a6;
+  --markdown-code-inline-bg: rgba(248, 249, 250, 0.1);
+  --markdown-code-inline-text: #dadce0;
+  --markdown-code-inline-border: rgba(248, 249, 250, 0.15);
+  --markdown-code-block-bg: #1e1f20;
+  --markdown-code-block-text: #c9d1d9;
+  --markdown-code-block-border: #30363d;
+}
+
 html,
 body,
 #root {
-  height: 100%; /* Quan trọng: cho phép #root (nơi App React render) chiếm full chiều cao */
+  /* Phần này giữ nguyên */
+  height: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Tính toán padding và border vào kích thước tổng của element */
+  box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit; /* Kế thừa box-sizing từ trên */
+  /* Phần này giữ nguyên */
+  box-sizing: inherit;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  /* Phần này giữ nguyên, nó sẽ tự động lấy màu từ :root hoặc html[data-theme="dark"] */
+  font-family: var(--font-family-base);
   line-height: 1.6;
-  background-color: #f0f2f5; /* Màu nền xám nhẹ cho bên ngoài app */
-  color: #333; /* Màu chữ mặc định */
-  -webkit-font-smoothing: antialiased; /* Làm chữ mượt hơn trên Webkit (Chrome, Safari) */
-  -moz-osx-font-smoothing: grayscale; /* Làm chữ mượt hơn trên Firefox */
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Đảm bảo #root cũng chiếm full chiều cao */
 #root {
-  display: flex; /* Giúp .chat-app-container bên trong có thể chiếm full height 100% dễ dàng */
+  /* Phần này giữ nguyên */
+  display: flex;
   flex-direction: column;
 }

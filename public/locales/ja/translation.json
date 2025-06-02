@@ -1,0 +1,17 @@
+{
+  "headerTitle": "AI学習アシスタント",
+  "inputPlaceholder": "ここに質問を入力してください...",
+  "sendButton": "送信",
+  "sendingButton": "送信中...",
+  "loadingAIMessage": "AI学習アシスタントがリクエストを処理中です...",
+  "userSender": "あなた",
+  "aiSender": "AI学習アシスタント",
+  "switchLanguageTo": "{{lang}}に切り替え",
+  "languages": {
+    "ja": "日本語",
+    "en": "英語",
+    "vi": "ベトナム語"
+  },
+  "errorNetwork": "ネットワークエラー。バックエンドを確認してください。",
+  "errorDefault": "エラーが発生しました。もう一度お試しください。"
+}

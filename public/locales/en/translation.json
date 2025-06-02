@@ -1,0 +1,17 @@
+{
+  "headerTitle": "AI Assistant",
+  "inputPlaceholder": "Enter your question here...",
+  "sendButton": "Send",
+  "sendingButton": "Sending...",
+  "loadingAIMessage": "AI Assistant is processing your request...",
+  "userSender": "You",
+  "aiSender": "AI Assistant",
+  "switchLanguageTo": "Switch to {{lang}}",
+  "languages": {
+    "ja": "Japanese",
+    "en": "English",
+    "vi": "Vietnamese"
+  },
+  "errorNetwork": "Network error. Please check the backend.",
+  "errorDefault": "An error occurred. Please try again."
+}

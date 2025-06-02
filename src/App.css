@@ -1,135 +1,185 @@
-/* src/App.css - Đã được sắp xếp lại cho gọn gàng hơn */
+/* src/App.css - Dark Theme Inspired by Gemini (Reorganized with Theme Toggle) */
 
-/* ---- Main App Layout ---- */
+/* ---- 1. Main App Layout & Header ---- */
 .chat-app-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #ffffff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  background-color: var(--bg-app-container);
+  color: var(--text-primary);
 }
 
 .app-header {
-  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
   z-index: 10;
-  color: white;
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: 0.5px;
-  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */ /* Tùy chọn */
+  color: var(--text-primary);
+  background-color: var(--bg-app-container);
+  border-bottom: 1px solid var(--header-border);
+  /* border-radius: 8px; /* Tùy chọn, có thể không cần cho full-width header */
 }
 
-/* ---- Chat Window & Scrollbar ---- */
+.app-header h1 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ---- 2. Header Controls (Language Switcher & Theme Toggle) ---- */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Khoảng cách giữa language select và theme toggle button */
+}
+
+.language-select {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  color: var(--select-text);
+  background-color: var(--select-bg);
+  border: 1px solid var(--select-border);
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+}
+.language-select:focus {
+  border-color: var(--select-focus-border);
+  box-shadow: 0 0 0 3px var(--select-focus-shadow);
+}
+.language-select option {
+  background-color: var(--select-bg);
+  color: var(--select-text);
+}
+
+.theme-toggle-button {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  color: var(--button-text);
+  background-color: var(--button-bg);
+  border: 1px solid var(--select-border); /* Dùng chung viền với select cho đồng bộ */
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+  white-space: nowrap; /* Để chữ không bị xuống dòng */
+}
+.theme-toggle-button:hover:not(:disabled) {
+  /* :not(:disabled) để không apply khi nút bị vô hiệu hóa */
+  background-color: var(--button-hover-bg);
+}
+.theme-toggle-button:focus {
+  border-color: var(--select-focus-border); /* Giống select cho đồng bộ */
+  box-shadow: 0 0 0 3px var(--select-focus-shadow);
+}
+
+/* ---- 3. Chat Window & Scrollbar ---- */
 .chat-window {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 18px;
+  gap: 20px;
   padding: 24px;
   overflow-y: auto;
-  background-color: #f7f9fc;
+  background-color: transparent;
 }
 
-/* Custom scrollbar (Webkit browsers) */
 .chat-window::-webkit-scrollbar {
   width: 8px;
 }
 .chat-window::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--scrollbar-track-bg);
   border-radius: 10px;
 }
 .chat-window::-webkit-scrollbar-thumb {
-  background: #c5c5c5;
+  background: var(--scrollbar-thumb-bg);
   border-radius: 10px;
 }
 .chat-window::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: var(--scrollbar-thumb-hover-bg);
 }
 
-/* ---- Message Bubbles ---- */
+/* ---- 4. Message Bubbles ---- */
 .message-bubble {
   position: relative;
   max-width: 75%;
-  padding: 12px 20px;
+  padding: 12px 18px;
   word-wrap: break-word;
-  line-height: 1.5;
-  border-radius: 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+  line-height: 1.6;
+  border-radius: 18px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
 }
-
-/* Styles for text content within any message bubble */
 .message-bubble .sender-name {
-  /* Class cho thẻ p chứa tên người gửi */
-  margin: 0 0 5px 0; /* Bỏ margin top, thêm margin bottom */
+  display: block;
+  margin: 0 0 6px 0;
   font-size: 0.8rem;
-  font-weight: 600;
-  opacity: 0.8;
-  display: block; /* Đảm bảo tên luôn ở trên */
+  font-weight: 500;
+  opacity: 0.7;
+  color: var(--text-secondary, var(--text-primary));
 }
 
 .user-message {
   align-self: flex-end;
-  color: white;
-  background-color: #007bff;
+  color: var(--bubble-user-text);
+  background-color: var(--bubble-user-bg);
   border-bottom-right-radius: 6px;
 }
 .user-message .sender-name strong {
-  /* Tên "Sếp" */
-  color: #e0e0e0;
+  color: var(--bubble-user-text);
+  opacity: 0.8;
 }
 
 .ai-message {
   align-self: flex-start;
-  color: #2c3e50;
-  background-color: #eef1f5;
+  color: var(--bubble-ai-text);
+  background-color: var(--bubble-ai-bg);
   border-bottom-left-radius: 6px;
 }
 .ai-message .sender-name strong {
-  /* Tên "Gemini" */
-  color: #007bff;
+  color: var(--text-secondary, var(--text-primary));
+  opacity: 0.9;
 }
-
-/* Loading message style */
 .ai-message em {
+  /* Loading message style */
   font-style: normal;
-  opacity: 0.7;
+  color: var(--text-placeholder);
 }
 
-/* ---- Message Input Form ---- */
+/* ---- 5. Message Input Form ---- */
 .message-input-form {
   display: flex;
   align-items: center;
-  padding: 16px 24px;
-  border-top: 1px solid #e7e7e7;
-  background-color: #ffffff;
-  /* box-shadow: 0 -2px 5px rgba(0,0,0,0.03); */ /* Tùy chọn */
+  padding: 12px 20px;
+  border-top: 1px solid var(--header-border);
+  background-color: var(--bg-app-container);
 }
-
 .message-input-form textarea {
   flex-grow: 1;
-  min-height: 50px; /* ~1 dòng + padding */
-  max-height: 150px; /* ~4-5 dòng */
+  min-height: 48px;
+  max-height: 200px;
   margin-right: 12px;
-  padding: 14px 20px;
+  padding: 7px 18px; /* Sửa lại từ 4px 18px của sếp cho cân đối hơn */
   overflow-y: auto;
   resize: none;
-  font-size: 1rem;
+  font-size: 0.75rem; /* Giữ 1rem cho dễ đọc, 0.75rem hơi nhỏ */
   line-height: 1.5;
-  border: 1px solid #dbe0e4;
+  color: var(--input-text);
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 24px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .message-input-form textarea::placeholder {
-  color: #909da7;
+  color: var(--input-placeholder);
 }
 .message-input-form textarea:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-focus-shadow);
 }
 
 .message-input-form button {
@@ -137,103 +187,102 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  height: 50px;
-  padding: 0 20px;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
+  width: 90px; /* Giữ kích thước nút tròn vuông vắn */
+  height: 48px;
+  padding: 0;
+  color: var(--button-text);
+  font-size: 1rem; /* Kích thước cho icon nếu sếp dùng */
   border: none;
-  border-radius: 24px;
-  background-image: linear-gradient(135deg, #007bff 0%, #0069d9 100%);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 46%; /* Đảm bảo nút tròn xoe */
+  background-color: var(--button-bg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: background-image 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 .message-input-form button:hover:not(:disabled) {
-  background-image: linear-gradient(135deg, #0069d9 0%, #0056b3 100%);
+  background-color: var(--button-hover-bg);
   transform: translateY(-1px);
 }
 .message-input-form button:active:not(:disabled) {
   transform: translateY(0px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: var(--button-active-bg);
 }
 .message-input-form button:disabled {
-  background-image: none;
-  background-color: #c5d9ed;
-  box-shadow: none;
+  background-color: var(--button-bg);
+  color: var(--button-disabled-text);
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* ---- Markdown Content Styling ---- */
+/* ---- 6. Markdown Content Styling ---- */
 .markdown-content {
-  /* Class bọc ReactMarkdown component */
-  /* Thuộc tính white-space: pre-line sẽ được áp dụng cho các thẻ p bên trong nó nếu cần */
+  color: var(--text-primary);
 }
-
 .markdown-content p {
   margin-top: 0;
-  margin-bottom: 0.5em;
-  white-space: pre-line; /* Đảm bảo xuống dòng cho text thường và text trong Markdown */
+  margin-bottom: 0.75em;
+  white-space: pre-line;
 }
 .markdown-content p:last-child {
   margin-bottom: 0;
 }
-
 .markdown-content strong {
-  font-weight: bold;
+  font-weight: 600;
+  color: var(--markdown-strong-text);
 }
-
 .markdown-content em {
   font-style: italic;
+  color: var(--markdown-em-text);
 }
-
 .markdown-content ul,
 .markdown-content ol {
   margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  padding-left: 25px; /* Tăng padding cho dễ nhìn hơn */
+  margin-bottom: 0.75em;
+  padding-left: 25px;
 }
-
 .markdown-content li {
-  margin-bottom: 0.3em; /* Tăng nhẹ khoảng cách */
+  margin-bottom: 0.3em;
 }
-
+.markdown-content li::marker {
+  color: var(--markdown-list-marker);
+}
 .markdown-content code {
   /* Inline code */
-  padding: 0.2em 0.4em;
-  margin: 0 2px; /* Thêm margin nhẹ */
-  font-size: 0.875em; /* Chỉnh lại size */
+  padding: 0.2em 0.5em;
+  margin: 0 2px;
+  font-size: 0.875em;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
-  background-color: rgba(27, 31, 35, 0.07); /* Màu nền nhẹ nhàng hơn */
+  background-color: var(--markdown-code-inline-bg);
+  color: var(--markdown-code-inline-text);
   border-radius: 4px;
+  border: 1px solid var(--markdown-code-inline-border);
 }
-
 .markdown-content pre {
   /* Code block */
-  padding: 16px;
+  padding: 1em;
   margin-top: 0.5em;
-  margin-bottom: 1em; /* Tăng margin bottom */
+  margin-bottom: 1em;
   overflow: auto;
-  font-size: 0.875em;
-  line-height: 1.45;
+  font-size: 0.9em;
+  line-height: 1.5;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
-  background-color: #282c34; /* Nền tối hơn, phổ biến cho code block */
-  color: #abb2bf; /* Màu chữ dễ đọc trên nền tối */
+  background-color: var(--markdown-code-block-bg);
+  color: var(--markdown-code-block-text);
   border-radius: 6px;
-  white-space: pre; /* Giữ nguyên khoảng trắng và không tự xuống dòng */
+  border: 1px solid var(--markdown-code-block-border);
+  white-space: pre;
 }
-
 .markdown-content pre code {
-  /* Reset style cho code bên trong pre */
-  display: inline; /* Đảm bảo nó không bị ảnh hưởng bởi style .markdown-content code ở trên */
+  display: inline;
   padding: 0;
   margin: 0;
-  font-size: inherit; /* Kế thừa font size từ pre */
-  font-family: inherit; /* Kế thừa font family */
+  font-size: inherit;
+  font-family: inherit;
   background-color: transparent;
   color: inherit;
   border-radius: 0;
-  word-wrap: normal; /* Tránh wrap không cần thiết */
+  border: none;
+  word-wrap: normal;
 }

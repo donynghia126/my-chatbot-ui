@@ -1,0 +1,17 @@
+{
+  "headerTitle": "Trợ Lý Học Tập AI",
+  "inputPlaceholder": "Nhập câu hỏi của bạn tại đây...",
+  "sendButton": "Gửi",
+  "sendingButton": "Đang gửi...",
+  "loadingAIMessage": "Trợ Lý Học Tập AI đang xử lý yêu cầu của bạn...",
+  "userSender": "Bạn",
+  "aiSender": "Trợ Lý Học Tập AI",
+  "switchLanguageTo": "Chuyển sang {{lang}}",
+  "languages": {
+    "ja": "Tiếng Nhật",
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  },
+  "errorNetwork": "Lỗi kết nối mạng. Vui lòng kiểm tra lại backend.",
+  "errorDefault": "Đã có lỗi xảy ra. Vui lòng thử lại."
+}
