@@ -9,8 +9,8 @@ i18n
   .use(LanguageDetector) // Tự động phát hiện ngôn ngữ người dùng
   .use(initReactI18next) // Kết nối i18next với react-i18next
   .init({
-    supportedLngs: ["vi", "ja", "en"], // Các ngôn ngữ mình hỗ trợ: Việt, Nhật, Anh
-    fallbackLng: "vi", // Ngôn ngữ mặc định nếu không phát hiện được hoặc ngôn ngữ không được hỗ trợ
+    supportedLngs: ["en", "vi", "ja"], // Các ngôn ngữ mình hỗ trợ: Anh, Việt, Nhật
+    fallbackLng: "en", // Ngôn ngữ mặc định nếu không phát hiện được hoặc ngôn ngữ không được hỗ trợ
     debug: process.env.NODE_ENV === "development", // Bật log debug khi ở môi trường dev (rất hữu ích!)
 
     // Cấu hình cho LanguageDetector

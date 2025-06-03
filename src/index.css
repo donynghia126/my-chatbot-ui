@@ -8,7 +8,7 @@
 
   /* === Light Theme Colors === */
   --bg-page: #f0f4f8; /* Nền ngoài app rất nhạt */
-  --text-primary: #1f2937; /* Chữ chính (xám đậm) */
+  --text-primary: #151d29; /* Chữ chính (xám đậm) */
   --text-secondary: #4b5563; /* Chữ phụ (xám vừa) */
   --text-placeholder: #6b7280; /* Chữ placeholder */
   --text-on-accent: #ffffff; /* Chữ trên nền màu nhấn (vd: nút) */
@@ -16,7 +16,7 @@
   --bg-app-container: #ffffff; /* Nền app chính (trắng) */
   --header-border: #e5e7eb; /* Viền header (xám rất nhạt) */
 
-  --bubble-user-bg: #3b82f6; /* Bubble User (xanh dương) */
+  --bubble-user-bg: #aabae8; /* Bubble User (xanh dương) */
   --bubble-user-text: #ffffff; /* Chữ trong bubble User */
   --bubble-ai-bg: #e5e7eb; /* Bubble AI (xám nhạt) */
   --bubble-ai-text: #1f2937; /* Chữ trong bubble AI */
@@ -27,10 +27,10 @@
   --input-focus-border: #3b82f6; /* Viền focus (xanh dương) */
   --input-focus-shadow: rgba(59, 130, 246, 0.15); /* Bóng mờ focus */
 
-  --button-bg: #3b82f6; /* Nền nút (xanh dương) */
+  --button-bg: #808184; /* Nền nút (xanh dương) */
   --button-text: #ffffff; /* Chữ trên nút */
-  --button-hover-bg: #2563eb; /* Nền nút khi hover */
-  --button-active-bg: #1d4ed8; /* Nền nút khi active */
+  --button-hover-bg: #8fa8de; /* Nền nút khi hover */
+  --button-active-bg: #8189a0; /* Nền nút khi active */
   --button-disabled-text: #9ca3af; /* Chữ nút khi disabled */
   --button-disabled-bg: #e5e7eb; /* Nền nút khi disabled */
 
@@ -67,7 +67,7 @@ html[data-theme="dark"] {
   --bg-app-container: #202124;
   --header-border: #3c4043;
 
-  --bubble-user-bg: #3b82f6; /* Giữ nguyên màu xanh hoặc có thể đổi sang xanh sáng hơn */
+  --bubble-user-bg: #36383a; /* Giữ nguyên màu xanh hoặc có thể đổi sang xanh sáng hơn */
   --bubble-user-text: #e8eaed;
   --bubble-ai-bg: #303134;
   --bubble-ai-text: #e8eaed;
@@ -75,7 +75,7 @@ html[data-theme="dark"] {
   --input-bg: #303134;
   --input-text: #e8eaed;
   --input-border: #5f6368;
-  --input-focus-border: #89b4fa;
+  --input-focus-border: #555c66;
   --input-focus-shadow: rgba(137, 180, 250, 0.15);
 
   --button-bg: #303134; /* Hoặc một màu accent khác nếu muốn */
@@ -88,7 +88,7 @@ html[data-theme="dark"] {
   --select-bg: #303134;
   --select-text: #e8eaed;
   --select-border: #5f6368;
-  --select-focus-border: #89b4fa;
+  --select-focus-border: #56575a;
   --select-focus-shadow: rgba(137, 180, 250, 0.15);
 
   --scrollbar-track-bg: rgba(0, 0, 0, 0.1);

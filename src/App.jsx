@@ -3,107 +3,100 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import { useTranslation } from "react-i18next"; // Hook để sử dụng i18n
-import "./App.css";
+import "./App.css"; // Import CSS cho component App
 
 function App() {
-  // Khởi tạo hook i18n để lấy hàm dịch (t) và đối tượng i18n (để đổi ngôn ngữ)
+  // Khởi tạo hook i18n để lấy hàm dịch (t) và đối tượng i18n (để đổi ngôn ngữ, lấy ngôn ngữ hiện tại)
   const { t, i18n } = useTranslation();
 
-  const [theme, setTheme] = useState("light");
+  // === Khai Báo State ===
+  const [theme, setTheme] = useState("light"); // State cho theme hiện tại (light/dark), mặc định là 'light'
+  const [message, setMessage] = useState(""); // Nội dung tin nhắn người dùng đang gõ
+  const [chatHistory, setChatHistory] = useState([]); // Mảng lưu trữ lịch sử cuộc trò chuyện
+  const [isLoading, setIsLoading] = useState(false); // Cờ báo hiệu đang chờ phản hồi từ AI
 
-  // === Khai báo State ===
-  // message: Nội dung tin nhắn người dùng đang gõ
-  const [message, setMessage] = useState("");
-  // chatHistory: Mảng lưu trữ lịch sử cuộc trò chuyện
-  const [chatHistory, setChatHistory] = useState([]);
-  // isLoading: Cờ báo hiệu đang chờ phản hồi từ AI
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Ref để tự động cuộn xuống tin nhắn mới nhất
+  // Ref để tự động cuộn khung chat xuống tin nhắn mới nhất
   const chatContainerRef = useRef(null);
-  // Lấy API URL từ biến môi trường, nếu không có thì dùng localhost (cho development)
+  // Lấy API URL từ biến môi trường Vite, nếu không có thì dùng localhost (cho development)
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-  // === Hàm Thay Đổi Ngôn Ngữ ===
-  const changeLanguage = (event) => {
-    const selectedLanguage = event.target.value;
-    i18n.changeLanguage(selectedLanguage); // i18next sẽ tự động tải file dịch và cập nhật UI
-  };
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    // Lát nữa mình sẽ lưu newTheme này vào localStorage ở một bước nâng cao hơn
-  };
+  // === useEffect Hooks ===
 
-  // === useEffect Hook ===
-  // Tự động cuộn xuống cuối khung chat mỗi khi chatHistory thay đổi
+  // 1. Thiết lập ngôn ngữ mặc định khi app tải lần đầu (nếu chưa có trong localStorage)
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("i18nextLng"); // i18next-browser-languagedetector lưu vào đây
+    if (!savedLanguage && i18n.language !== "en") {
+      // Nếu chưa có ngôn ngữ lưu và ngôn ngữ hiện tại không phải 'en'
+      i18n.changeLanguage("en"); // Thì đặt mặc định là tiếng Anh
+    }
+    // Nếu đã có savedLanguage, LanguageDetector sẽ tự động áp dụng nó từ các lần tải sau.
+    // i18n.language !== 'en' để tránh gọi changeLanguage không cần thiết nếu detector đã set đúng.
+  }, [i18n]); // Chạy khi i18n object sẵn sàng
+
+  // 2. Tự động cuộn xuống cuối khung chat mỗi khi chatHistory thay đổi
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
   }, [chatHistory]);
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    // Khi theme thay đổi, mình đặt attribute 'data-theme' trên thẻ <html>
-    // CSS của mình (trong index.css) sẽ dựa vào attribute này để áp dụng đúng bộ màu
-    // Ví dụ: html[data-theme="dark"] { ...các biến màu dark... }
-    //        :root { ...các biến màu light... } (mặc định khi không có data-theme="dark")
-    // Để light theme là mặc định khi data-theme không phải là "dark",
-    // mình có thể đảm bảo xóa attribute nếu là light, hoặc để CSS :root xử lý.
-    // Cách đơn giản là luôn set data-theme:
-    // document.documentElement.setAttribute('data-theme', theme);
-    // Và trong index.css, mình sẽ có:
-    // html[data-theme="light"] { /* ... light vars ... */ }
-    // html[data-theme="dark"] { /* ... dark vars ... */ }
-    // Hoặc, như mình làm: :root cho light, html[data-theme="dark"] cho dark.
-    // Vậy thì khi theme là 'light', mình có thể xóa attribute 'data-theme'
-    // hoặc đảm bảo CSS :root được ưu tiên khi không có data-theme="dark".
 
-    // Cách hiện tại của mình với :root cho light và html[data-theme="dark"] cho dark là:
+  // 3. Áp dụng theme (light/dark) vào thẻ <html> mỗi khi state 'theme' thay đổi
+  useEffect(() => {
     if (theme === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
     } else {
-      // Khi là 'light', mình xóa attribute 'data-theme' đi để các biến trong :root (light theme) được áp dụng
-      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.removeAttribute("data-theme"); // :root (light theme) sẽ được áp dụng
     }
-  }, [theme]); // Hook này sẽ chạy mỗi khi state 'theme' thay đổi
+    // Optional: Lưu theme vào localStorage để ghi nhớ lựa chọn của người dùng
+    // localStorage.setItem('theme', theme);
+  }, [theme]);
 
-  // === Hàm Xử Lý Gửi Tin Nhắn ===
+  // === Hàm Xử Lý Logic ===
+
+  // Hàm thay đổi ngôn ngữ giao diện
+  const changeLanguage = (event) => {
+    const selectedLanguage = event.target.value;
+    i18n.changeLanguage(selectedLanguage); // i18next tự động tải file dịch và cập nhật UI
+  };
+
+  // Hàm chuyển đổi giữa light theme và dark theme
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  };
+
+  // Hàm xử lý gửi tin nhắn
   const handleSendMessage = async (e) => {
     if (e) e.preventDefault(); // Ngăn form submit làm reload trang
     if (!message.trim()) return; // Không gửi tin nhắn rỗng
 
-    // Tạo object tin nhắn mới của người dùng với ID duy nhất
     const newUserMessage = {
       id: `user-${Date.now()}`,
       sender: "user",
       text: message,
     };
 
-    // Chuẩn bị dữ liệu gửi cho API: bao gồm lịch sử chat và tin nhắn mới của người dùng.
-    // 'role' phải là "user" hoặc "model" theo yêu cầu của Gemini API.
+    // Chuẩn bị session chat gửi cho API (bao gồm lịch sử và tin nhắn mới)
+    // 'role' phải là "user" hoặc "model" theo chuẩn Gemini API
     const apiChatSession = [
       ...chatHistory.map((chatItem) => ({
-        role: chatItem.sender === "user" ? "user" : "model", // 'user' cho người dùng, 'model' cho AI
+        role: chatItem.sender === "user" ? "user" : "model",
         text: chatItem.text,
       })),
-      { role: "user", text: newUserMessage.text }, // Tin nhắn mới nhất từ người dùng
+      { role: "user", text: newUserMessage.text },
     ];
 
-    // Cập nhật UI ngay lập tức với tin nhắn của người dùng (Optimistic Update)
-    setChatHistory((prev) => [...prev, newUserMessage]);
-    setMessage(""); // Xóa nội dung trong ô input
+    setChatHistory((prev) => [...prev, newUserMessage]); // Cập nhật UI với tin nhắn mới của người dùng
+    setMessage(""); // Xóa nội dung ô input
     setIsLoading(true); // Bật trạng thái đang tải
 
     try {
-      // Gọi API backend
       const response = await axios.post(`${API_BASE_URL}/api/v1/chat`, {
         chatSession: apiChatSession,
         targetLanguage: i18n.language, // Gửi ngôn ngữ hiện tại để AI trả lời đúng ngôn ngữ
       });
 
-      // Xử lý và hiển thị phản hồi từ AI
       const aiReply = {
         id: `ai-${Date.now()}`,
         sender: "ai",
@@ -111,64 +104,64 @@ function App() {
       };
       setChatHistory((prev) => [...prev, aiReply]);
     } catch (error) {
-      // Log lỗi ra console (có thể dịch key 'errorConsoleLog')
       console.error(t("errorConsoleLog", "Lỗi khi gọi API:"), error);
-      let errorMessage = t("errorDefault"); // Thông báo lỗi mặc định (đã dịch)
-
-      // Xử lý các loại lỗi cụ thể hơn để có thông báo thân thiện
+      let errorMessage = t("errorDefault");
       if (error.response && error.response.data && error.response.data.error) {
-        errorMessage = error.response.data.error; // Lỗi trả về từ server
+        errorMessage = error.response.data.error;
       } else if (error.message && error.message.includes("Network Error")) {
-        errorMessage = t("errorNetwork"); // Lỗi mạng (đã dịch)
+        errorMessage = t("errorNetwork");
       } else if (error.message) {
-        errorMessage = error.message; // Các lỗi khác (hiển thị lỗi gốc từ JS)
+        errorMessage = error.message;
       }
-
       const errorReply = {
         id: `error-${Date.now()}`,
-        sender: "ai", // Hiển thị như một tin nhắn từ AI
+        sender: "ai",
         text: errorMessage,
       };
       setChatHistory((prev) => [...prev, errorReply]);
     } finally {
-      setIsLoading(false); // Tắt trạng thái đang tải dù thành công hay thất bại
+      setIsLoading(false); // Tắt trạng thái đang tải
     }
   };
 
-  // === Hàm Xử Lý Gửi Tin Nhắn Khi Nhấn Phím Enter ===
+  // Hàm xử lý gửi tin nhắn khi nhấn phím Enter
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      // Chỉ gửi khi nhấn Enter (không phải Shift+Enter để xuống dòng)
-      e.preventDefault(); // Ngăn hành vi mặc định của Enter là xuống dòng trong textarea
+      e.preventDefault();
       handleSendMessage();
     }
   };
 
-  // === Phần Render JSX ===
+  // === Phần Render Giao Diện JSX ===
   return (
     <div className="chat-app-container">
-      {/* Header của ứng dụng */}
       <header className="app-header">
-        <h1>{t("headerTitle")}</h1>
+        {/* Tiêu đề ứng dụng, có link về trang chủ */}
+        <a href="/" className="header-link">
+          <h1>{t("headerTitle")}</h1>
+        </a>
+        {/* Cụm điều khiển ngôn ngữ và theme */}
         <div className="header-controls">
-          {" "}
-          {/* Bọc cả language switcher và theme toggle cho dễ layout */}
           <div className="language-switcher">
             <select
               value={i18n.language}
               onChange={changeLanguage}
               className="language-select"
+              title={t("languageSelectorTitle", "Chọn ngôn ngữ hiển thị")} // Thêm title cho dễ hiểu
             >
-              <option value="vi">{t("languages.vi")}</option>
               <option value="en">{t("languages.en")}</option>
+              <option value="vi">{t("languages.vi")}</option>
               <option value="ja">{t("languages.ja")}</option>
             </select>
           </div>
-          {/* === NÚT CHUYỂN THEME MỚI === */}
-          <button onClick={toggleTheme} className="theme-toggle-button">
-            {/* Hiển thị icon hoặc text tùy theo theme hiện tại */}
-            {theme === "light" ? "🌙 " : "☀️ "}
-            {/* Sếp có thể dùng icon thật sau này cho đẹp hơn */}
+          {/* Nút chuyển đổi Sáng/Tối */}
+          <button
+            onClick={toggleTheme}
+            className="theme-toggle-button"
+            title={t("themeToggleButtonTitle", "Chuyển đổi giao diện Sáng/Tối")} // Thêm title
+          >
+            {theme === "light" ? "🌙" : "☀️"}{" "}
+            {/* Icon emoji thay đổi theo theme */}
           </button>
         </div>
       </header>
@@ -177,28 +170,25 @@ function App() {
       <div className="chat-window" ref={chatContainerRef}>
         {chatHistory.map((chatItem) => (
           <div
-            key={chatItem.id} // Key duy nhất cho React quản lý list hiệu quả
+            key={chatItem.id}
             className={`message-bubble ${
               chatItem.sender === "user" ? "user-message" : "ai-message"
             }`}
           >
-            {/* Tên người gửi (dịch theo ngôn ngữ đã chọn) */}
             <p className="sender-name">
               <strong>
                 {chatItem.sender === "user" ? t("userSender") : t("aiSender")}:
               </strong>
             </p>
-            {/* Nội dung tin nhắn, được render dưới dạng Markdown */}
             <div className="markdown-content">
               <ReactMarkdown>{chatItem.text}</ReactMarkdown>
             </div>
           </div>
         ))}
-        {/* Hiển thị thông báo đang tải khi đang chờ AI trả lời */}
+        {/* Thông báo đang tải */}
         {isLoading && (
           <div className="message-bubble ai-message">
-            <em>{t("loadingAIMessage")}</em>{" "}
-            {/* Thông báo tải (dịch theo ngôn ngữ đã chọn) */}
+            <em>{t("loadingAIMessage")}</em>
           </div>
         )}
       </div>
@@ -208,13 +198,14 @@ function App() {
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleKeyPress} // Cho phép gửi bằng phím Enter
-          placeholder={t("inputPlaceholder")} // Chữ gợi ý (dịch theo ngôn ngữ đã chọn)
+          onKeyPress={handleKeyPress}
+          placeholder={t("inputPlaceholder")}
           rows="3"
         />
-        <button type="submit" disabled={isLoading}>
-          {/* Chữ trên nút gửi, thay đổi tùy trạng thái và ngôn ngữ */}
-          {isLoading ? t("sendingButton") : t("sendButton")}
+        <button type="submit" disabled={isLoading} title={t("sendButton")}>
+          {/* Icon cho nút gửi, thay đổi tùy trạng thái */}
+          {isLoading ? "..." : "➢"}{" "}
+          {/* "..." khi đang tải, "➢" (hoặc ✈️) khi bình thường */}
         </button>
       </form>
     </div>
