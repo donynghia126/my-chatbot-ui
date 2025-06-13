@@ -1,0 +1,63 @@
+/* src/styles/WelcomeScreen.css */
+
+.welcome-screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1; /* Chiếm hết không gian của khu vực chat */
+  height: 100%;
+  padding: 1rem;
+  text-align: center;
+  overflow: auto;
+}
+
+.welcome-content {
+  max-width: 600px;
+  width: 100%;
+}
+
+.welcome-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bubble-user-text);
+  background-color: var(--bubble-user-bg);
+  border-radius: 50%;
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
+}
+
+.suggestion-chips-container {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các chip xuống dòng trên màn hình nhỏ */
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.suggestion-chip {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.suggestion-chip:hover {
+  background-color: var(--button-hover-bg);
+  border-color: var(--select-border);
+}

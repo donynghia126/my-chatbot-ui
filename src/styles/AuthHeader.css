@@ -1,0 +1,47 @@
+/* src/styles/AuthHeader.css */
+
+.auth-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem; /* Padding lớn hơn một chút */
+  width: 100%;
+  position: absolute; /* Đặt header ở trên cùng của trang */
+  top: 0;
+  left: 0;
+  box-sizing: border-box; /* Đảm bảo padding không làm tràn layout */
+}
+
+.auth-logo-link {
+  text-decoration: none;
+}
+
+.auth-logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: opacity 0.2s ease;
+}
+
+.auth-logo-link:hover .auth-logo-text {
+  opacity: 0.8;
+}
+
+.auth-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Các class .language-select và .theme-toggle-button có thể kế thừa từ App.css, 
+   hoặc sếp có thể định nghĩa lại ở đây nếu muốn chúng có style khác biệt. */
+/* Ví dụ, làm cho nút trên trang auth có nền trong suốt hơn */
+.auth-header-controls .language-select,
+.auth-header-controls .theme-toggle-button {
+  background-color: var(
+    --bg-app-container-translucent,
+    rgba(255, 255, 255, 0.1)
+  );
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--header-border);
+}

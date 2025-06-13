@@ -1,6 +1,6 @@
 /* src/App.css - Dark Theme Inspired by Gemini, User Refinements & Reorganized */
 
-/* ---- 1. Main App Layout & Header ---- */
+/* ---- 1. Main App Layout ---- */
 .chat-app-container {
   display: flex;
   flex-direction: column;
@@ -11,21 +11,28 @@
   color: var(--text-primary);
 }
 
+/* ---- 2. Header & Controls ---- */
 .app-header {
+  /* Layout: Dùng Flexbox để căn chỉnh title và cụm điều khiển */
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  /* Box Model */
   padding: 10px 20px;
+  border-bottom: 1px solid var(--header-border);
   z-index: 10;
+
+  /* Visual */
   color: var(--text-primary);
   background-color: var(--bg-app-container);
-  border-bottom: 1px solid var(--header-border);
-  /* border-radius: 8px; /* Tùy chọn, có thể không cần cho full-width header */
+  /* border-radius: 8px; /* Tùy chọn, có thể không cần cho header full-width */
 }
 
 .app-header .header-link {
   color: inherit; /* Kế thừa màu từ .app-header */
   text-decoration: none; /* Bỏ gạch chân */
+  transition: opacity 0.2s ease;
 }
 .app-header .header-link:hover {
   opacity: 0.8; /* Hiệu ứng hover nhẹ */
@@ -37,13 +44,14 @@
   font-weight: 500;
 }
 
-/* ---- 2. Header Controls (Language Switcher & Theme Toggle) ---- */
+/* Cụm các nút điều khiển bên phải header */
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 15px; /* Khoảng cách giữa language select và theme toggle button */
+  gap: 15px; /* Khoảng cách giữa các nút điều khiển */
 }
 
+/* Dropdown chọn ngôn ngữ */
 .language-select {
   padding: 6px 10px;
   font-size: 0.9rem;
@@ -53,6 +61,7 @@
   border-radius: 6px;
   outline: none;
   cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .language-select:focus {
   border-color: var(--select-focus-border);
@@ -60,18 +69,17 @@
 }
 .language-select option {
   color: var(--select-text);
-  background-color: var(
-    --select-bg
-  ); /* Có thể không hoạt động đồng nhất trên mọi trình duyệt */
+  background-color: var(--select-bg);
 }
 
+/* Nút chuyển Sáng/Tối */
 .theme-toggle-button {
   padding: 6px 12px;
   font-size: 0.9rem;
   white-space: nowrap; /* Để chữ/icon không bị xuống dòng */
   color: var(--button-text);
   background-color: var(--button-bg);
-  border: 1px solid var(--select-border); /* Dùng chung viền với select cho đồng bộ */
+  border: 1px solid var(--select-border);
   border-radius: 6px;
   outline: none;
   cursor: pointer;
@@ -82,22 +90,70 @@
   background-color: var(--button-hover-bg);
 }
 .theme-toggle-button:focus {
-  border-color: var(--select-focus-border); /* Giống select cho đồng bộ */
+  border-color: var(--select-focus-border);
   box-shadow: 0 0 0 3px var(--select-focus-shadow);
+}
+
+/* Text chào mừng và các nút/link xác thực */
+.header-controls .user-welcome {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.header-controls .logout-button,
+.header-controls .auth-link {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border: 1px solid transparent; /* Đặt border transparent mặc định */
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-controls .logout-button {
+  color: var(--button-text);
+  background-color: var(--button-bg-danger, #f18590);
+  border-color: var(--button-bg-danger, #000000);
+}
+.header-controls .logout-button:hover {
+  background-color: var(--button-hover-bg-danger, #c82333);
+  border-color: var(--button-hover-bg-danger, #c82333);
+}
+
+.header-controls .login-link {
+  color: var(--button-text);
+  background-color: var(--button-bg-success, #28a745);
+  border-color: var(--button-bg-success, #28a745);
+}
+.header-controls .login-link:hover {
+  background-color: var(--button-hover-bg-success, #218838);
+  border-color: var(--button-hover-bg-success, #218838);
+}
+
+.header-controls .register-link {
+  color: var(--text-primary);
+  background-color: transparent;
+  border-color: var(--select-border); /* Dùng chung viền với select */
+}
+.header-controls .register-link:hover {
+  background-color: rgba(128, 128, 128, 0.1);
 }
 
 /* ---- 3. Chat Window & Scrollbar ---- */
 .chat-window {
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Chiếm hết không gian còn lại */
-  gap: 20px; /* Khoảng cách giữa các bubble */
+  flex-grow: 1;
+  gap: 20px;
   padding: 24px;
   overflow-y: auto;
-  background-color: transparent; /* Lấy màu nền từ .chat-app-container */
+  background-color: transparent; /* Nền trong suốt để lấy màu từ .chat-app-container */
 }
 
-/* Custom scrollbar (Webkit browsers) */
 .chat-window::-webkit-scrollbar {
   width: 8px;
 }
@@ -115,7 +171,7 @@
 
 /* ---- 4. Message Bubbles ---- */
 .message-bubble {
-  position: relative; /* Cho "đuôi" tin nhắn nếu có sau này */
+  position: relative;
   max-width: 75%;
   padding: 12px 18px;
   line-height: 1.6;
@@ -125,41 +181,31 @@
 }
 
 .message-bubble .sender-name {
-  /* Tên người gửi ("Bạn", "Gemini") */
   display: block;
-  margin: 0 0 6px 0; /* Khoảng cách với nội dung tin nhắn */
+  margin: 0 0 6px 0;
   font-size: 0.8rem;
-  font-weight: 700; /* Đậm hơn để dễ phân biệt tên */
-  opacity: 0.9; /* Tăng độ rõ nét một chút */
-  /* color: var(--text-secondary, var(--text-primary)); /* Để màu riêng cho user/ai bên dưới */
+  font-weight: 700; /* Đậm hơn để dễ phân biệt */
+  opacity: 0.9;
 }
 
 .user-message {
   align-self: flex-end; /* Tin nhắn người dùng bên phải */
   color: var(--bubble-user-text);
   background-color: var(--bubble-user-bg);
-  border-bottom-right-radius: 6px; /* "Đuôi" tin nhắn */
+  border-bottom-right-radius: 6px;
 }
 .user-message .sender-name strong {
-  color: var(
-    --text-sender-user,
-    var(--bubble-user-text)
-  ); /* Dùng biến màu riêng cho tên User */
-  /* opacity: 0.8; /* Bỏ opacity ở đây nếu màu đã đủ độ tương phản */
+  color: var(--text-sender-user, var(--bubble-user-text));
 }
 
 .ai-message {
   align-self: flex-start; /* Tin nhắn AI bên trái */
   color: var(--bubble-ai-text);
   background-color: var(--bubble-ai-bg);
-  border-bottom-left-radius: 6px; /* "Đuôi" tin nhắn */
+  border-bottom-left-radius: 6px;
 }
 .ai-message .sender-name strong {
-  color: var(
-    --text-sender-ai,
-    var(--text-primary)
-  ); /* Dùng biến màu riêng cho tên AI */
-  /* opacity: 0.9; */
+  color: var(--text-sender-ai, var(--text-primary));
 }
 
 .ai-message em {
@@ -171,21 +217,21 @@
 /* ---- 5. Message Input Form ---- */
 .message-input-form {
   display: flex;
-  align-items: center; /* Căn giữa textarea và button theo chiều dọc */
+  align-items: center;
   padding: 12px 20px;
-  border-top: 1px solid var(--header-border); /* Dùng chung biến border với header */
-  background-color: var(--bg-app-container); /* Đồng bộ với nền app */
+  border-top: 1px solid var(--header-border);
+  background-color: var(--bg-app-container);
 }
 
 .message-input-form textarea {
   flex-grow: 1;
   min-height: 48px;
-  max-height: 200px; /* Cho phép tối đa khoảng 5-6 dòng trước khi cuộn */
+  max-height: 200px;
   margin-right: 12px;
-  padding: 7px 18px; /* Điều chỉnh của sếp */
+  padding: 7px 18px; /* Giữ tinh chỉnh của sếp */
   overflow-y: auto;
   resize: none;
-  font-size: 0.75rem; /* Điều chỉnh của sếp */
+  font-size: 0.75rem; /* Giữ tinh chỉnh của sếp */
   line-height: 1.5;
   color: var(--input-text);
   background-color: var(--input-bg);
@@ -206,15 +252,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0; /* Không cho nút bị co lại khi textarea rộng ra */
-  width: 60px; /* Điều chỉnh của sếp */
-  height: 60px; /* Điều chỉnh của sếp */
-  padding: 0; /* Điều chỉnh của sếp */
-  font-size: 1.75rem; /* Điều chỉnh của sếp, phù hợp cho icon */
+  flex-shrink: 0;
+  width: 60px; /* Giữ tinh chỉnh của sếp */
+  height: 60px; /* Giữ tinh chỉnh của sếp */
+  padding: 0;
+  font-size: 1.75rem; /* Giữ tinh chỉnh của sếp, phù hợp cho icon */
   color: var(--button-text);
   background-color: var(--button-bg);
   border: none;
-  border-radius: 50%; /* Điều chỉnh của sếp, đảm bảo nút tròn */
+  border-radius: 50%; /* Giữ tinh chỉnh của sếp, đảm bảo nút tròn */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
@@ -229,56 +275,45 @@
 }
 .message-input-form button:disabled {
   color: var(--button-disabled-text);
-  background-color: var(
-    --button-bg
-  ); /* Hoặc một màu nhạt hơn hẳn: var(--input-bg) */
+  background-color: var(--button-bg);
   box-shadow: none;
   cursor: not-allowed;
 }
 
 /* ---- 6. Markdown Content Styling ---- */
 .markdown-content {
-  /* Class bọc component ReactMarkdown */
-  color: var(
-    --text-primary
-  ); /* Đảm bảo nội dung Markdown cũng theo màu chữ của theme */
+  color: var(--text-primary);
 }
 .markdown-content p {
-  margin-top: 0; /* Bỏ margin top cho thẻ p đầu tiên do ReactMarkdown tự tạo */
+  margin-top: 0;
   margin-bottom: 0.75em;
-  white-space: pre-line; /* Quan trọng để giữ dấu xuống dòng */
+  white-space: pre-line; /* Rất quan trọng để giữ dấu xuống dòng */
 }
 .markdown-content p:last-child {
-  margin-bottom: 0; /* Bỏ margin cho đoạn cuối cùng */
+  margin-bottom: 0;
 }
-
 .markdown-content strong {
-  font-weight: 600; /* Hoặc 700 nếu muốn đậm hơn */
+  font-weight: 600;
   color: var(--markdown-strong-text);
 }
-
 .markdown-content em {
   font-style: italic;
   color: var(--markdown-em-text);
 }
-
 .markdown-content ul,
 .markdown-content ol {
   margin-top: 0.5em;
   margin-bottom: 0.75em;
-  padding-left: 25px; /* Thụt lề cho danh sách */
+  padding-left: 25px;
 }
-
 .markdown-content li {
-  margin-bottom: 0.3em; /* Khoảng cách giữa các mục trong danh sách */
+  margin-bottom: 0.3em;
 }
 .markdown-content li::marker {
-  /* Style cho dấu đầu dòng của list */
   color: var(--markdown-list-marker);
 }
-
 .markdown-content code {
-  /* Định dạng cho code inline */
+  /* Inline code */
   padding: 0.2em 0.5em;
   margin: 0 2px;
   font-size: 0.875em;
@@ -289,13 +324,12 @@
   border-radius: 4px;
   border: 1px solid var(--markdown-code-inline-border);
 }
-
 .markdown-content pre {
-  /* Định dạng cho khối code (code block) */
+  /* Code block */
   padding: 1em;
   margin-top: 0.5em;
   margin-bottom: 1em;
-  overflow-x: auto; /* Cho phép cuộn ngang nếu code dài */
+  overflow: auto;
   font-size: 0.9em;
   line-height: 1.5;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
@@ -304,11 +338,9 @@
   color: var(--markdown-code-block-text);
   border-radius: 6px;
   border: 1px solid var(--markdown-code-block-border);
-  white-space: pre; /* Giữ nguyên khoảng trắng và không tự xuống dòng */
+  white-space: pre;
 }
-
 .markdown-content pre code {
-  /* Reset style cho thẻ code bên trong pre */
   display: inline;
   padding: 0;
   margin: 0;
@@ -319,4 +351,80 @@
   border-radius: 0;
   border: none;
   word-wrap: normal;
+}
+/* ---- 7. Chat Page Layout with Sidebar ---- */
+.chat-page-layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative; /* Cần cho việc định vị sidebar trên mobile */
+}
+
+/* Thanh sidebar bên trái */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  flex-shrink: 0;
+  background-color: var(--sidebar-bg, #111827);
+  border-right: 1px solid var(--header-border);
+  overflow-y: auto;
+  transition: width 0.3s ease, transform 0.3s ease; /* Thêm hiệu ứng chuyển động */
+}
+/* Trạng thái khi sidebar đóng trên desktop */
+.chat-page-layout.sidebar-closed .sidebar {
+  width: 0;
+  padding: 0; /* Ẩn padding khi đóng */
+  overflow: hidden; /* Ẩn nội dung khi đóng */
+  border-right: none;
+}
+.sidebar-toggle-button {
+  display: flex; /* <<-- SỬA LẠI THÀNH 'flex' ĐỂ LUÔN HIỂN THỊ */
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin-right: 0.5rem; /* Khoảng cách với tiêu đề */
+  color: var(--text-primary);
+  background-color: transparent; /* Nền trong suốt */
+  border: none;
+  border-radius: 50%; /* Bo tròn nút cho đẹp */
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-toggle-button:hover {
+  background-color: var(--button-hover-bg);
+}
+.sidebar-toggle-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Khu vực chat chính bên phải */
+.main-chat-area {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Chiếm hết không gian còn lại */
+  height: 100%;
+  overflow: hidden; /* Đảm bảo header và form không bị đẩy ra ngoài */
+}
+
+/* Ghi đè lại một chút style của .chat-app-container để nó hoạt động trong layout mới */
+.main-chat-area .chat-app-container {
+  height: 100%;
+  box-shadow: none; /* Bỏ shadow vì giờ nó là một phần của layout lớn */
+}
+.chat-content-area {
+  display: flex; /* Giúp WelcomeScreen có thể tự căn giữa */
+  flex-direction: column;
+  flex-grow: 1; /* Quan trọng: chiếm hết không gian còn lại */
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung (WelcomeScreen hoặc ChatWindow) quá dài */
+}
+
+/* Ghi đè lại một chút style của chat-window để nó không tự chiếm không gian nữa */
+.chat-window {
+  flex-grow: 0; /* Không cần co giãn nữa vì cha của nó (.chat-content-area) đã làm việc đó */
 }

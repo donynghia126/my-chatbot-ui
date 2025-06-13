@@ -1,17 +1,80 @@
 {
-  "headerTitle": "AI学習アシスタント",
+  "headerTitle": "StudyDony",
   "inputPlaceholder": "ここに質問を入力してください...",
   "sendButton": "送信",
   "sendingButton": "送信中...",
-  "loadingAIMessage": "AI学習アシスタントがリクエストを処理中です...",
+  "loadingAIMessage": "StudyDony AIが処理中です...",
   "userSender": "あなた",
-  "aiSender": "AI学習アシスタント",
-  "switchLanguageTo": "{{lang}}に切り替え",
+  "aiSender": "StudyDony AI",
   "languages": {
-    "ja": "日本語",
+    "title": "言語",
     "en": "英語",
-    "vi": "ベトナム語"
+    "vi": "ベトナム語",
+    "ja": "日本語"
   },
-  "errorNetwork": "ネットワークエラー。バックエンドを確認してください。",
-  "errorDefault": "エラーが発生しました。もう一度お試しください。"
+  "error": {
+    "loadConversation": "この会話を読み込めませんでした。",
+    "network": "ネットワークエラー。接続を確認してください。",
+    "default": "エラーが発生しました。もう一度お試しください。",
+    "consoleLog": "API呼び出しエラー:",
+    "renameConversation": "この会話の名前を変更できませんでした。"
+  },
+  "confirmations": {
+    "deleteSuccess": "会話が正常に削除されました。",
+    "renameSuccess": "会話の名前が正常に変更されました。"
+  },
+  "languageSelectorTitle": "表示言語を選択",
+  "themeToggleButtonTitle": "ライト/ダークテーマを切り替え",
+  "welcome": "ようこそ",
+  "logoutButton": "ログアウト",
+  "loginButton": "ログイン",
+  "registerButton": "登録",
+  "loginPage": {
+    "title": "StudyDony AIにログイン",
+    "successMessage": "ログインに成功しました！",
+    "loggingInButton": "ログイン中...",
+    "loginButton": "ログイン",
+    "noAccountYet": "アカウントをお持ちではありませんか？",
+    "registerLink": "今すぐ登録"
+  },
+  "registerPage": {
+    "title": "StudyDony AIアカウントを作成",
+    "successMessage": "アカウントが正常に作成されました。ログインしてください。",
+    "registeringButton": "登録中...",
+    "registerButton": "登録",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
+    "loginLink": "今すぐログイン"
+  },
+  "form": {
+    "firstName": "名",
+    "lastName": "姓",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "passwordConfirmation": "パスワードの確認"
+  },
+  "sidebar": {
+    "newChat": "新しい会話",
+    "loading": "読み込み中..."
+  },
+  "welcomeScreen": {
+    "title": "今日はどのようなご用件でしょうか？",
+    "prompt1": "相対性理論とは何ですか？",
+    "prompt2": "語彙を効果的に学ぶ方法は？",
+    "prompt3": "小説「チー・フェオ」を要約してください",
+    "prompt4": "ニュートンの第二法則を説明してください"
+  },
+  "settings": {
+    "title": "設定",
+    "theme": "テーマ",
+    "language": "言語"
+  },
+  "theme": {
+    "switchToDark": "ダークモード",
+    "switchToLight": "ライトモード"
+  },
+  "conversation": {
+    "rename": "変更",
+    "delete": "削除",
+    "options": "オプション"
+  }
 }

@@ -1,17 +1,80 @@
 {
-  "headerTitle": "Trợ Lý Học Tập AI",
+  "headerTitle": "StudyDony",
   "inputPlaceholder": "Nhập câu hỏi của bạn tại đây...",
   "sendButton": "Gửi",
   "sendingButton": "Đang gửi...",
-  "loadingAIMessage": "Trợ Lý Học Tập AI đang xử lý yêu cầu của bạn...",
+  "loadingAIMessage": "StudyDony AI đang xử lý...",
   "userSender": "Bạn",
-  "aiSender": "Trợ Lý Học Tập AI",
-  "switchLanguageTo": "Chuyển sang {{lang}}",
+  "aiSender": "StudyDony AI",
   "languages": {
-    "ja": "Tiếng Nhật",
+    "title": "Ngôn ngữ",
     "en": "Tiếng Anh",
-    "vi": "Tiếng Việt"
+    "vi": "Tiếng Việt",
+    "ja": "Tiếng Nhật"
   },
-  "errorNetwork": "Lỗi kết nối mạng. Vui lòng kiểm tra lại backend.",
-  "errorDefault": "Đã có lỗi xảy ra. Vui lòng thử lại."
+  "error": {
+    "loadConversation": "Không thể tải cuộc hội thoại này.",
+    "network": "Lỗi kết nối mạng. Vui lòng kiểm tra lại.",
+    "default": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+    "consoleLog": "Lỗi khi gọi API:",
+    "renameConversation": "Không thể đổi tên cuộc hội thoại này."
+  },
+  "confirmations": {
+    "deleteSuccess": "Đã xóa hội thoại thành công.",
+    "renameSuccess": "Đã đổi tên hội thoại thành công."
+  },
+  "languageSelectorTitle": "Chọn ngôn ngữ hiển thị",
+  "themeToggleButtonTitle": "Chuyển đổi giao diện Sáng/Tối",
+  "welcome": "Chào",
+  "logoutButton": "Đăng xuất",
+  "loginButton": "Đăng nhập",
+  "registerButton": "Đăng ký",
+  "loginPage": {
+    "title": "Đăng Nhập StudyDony AI",
+    "successMessage": "Đăng nhập thành công!",
+    "loggingInButton": "Đang đăng nhập...",
+    "loginButton": "Đăng Nhập",
+    "noAccountYet": "Chưa có tài khoản?",
+    "registerLink": "Đăng ký ngay"
+  },
+  "registerPage": {
+    "title": "Tạo Tài Khoản StudyDony AI",
+    "successMessage": "Tài khoản đã được tạo! Vui lòng đăng nhập.",
+    "registeringButton": "Đang đăng ký...",
+    "registerButton": "Đăng Ký",
+    "alreadyHaveAccount": "Đã có tài khoản?",
+    "loginLink": "Đăng nhập ngay"
+  },
+  "form": {
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "passwordConfirmation": "Xác nhận mật khẩu"
+  },
+  "sidebar": {
+    "newChat": "Cuộc trò chuyện mới",
+    "loading": "Đang tải..."
+  },
+  "welcomeScreen": {
+    "title": "Hôm nay tôi có thể giúp gì cho bạn?",
+    "prompt1": "Thuyết tương đối là gì?",
+    "prompt2": "Làm sao để học từ vựng hiệu quả?",
+    "prompt3": "Tóm tắt tác phẩm \"Chí Phèo\"",
+    "prompt4": "Giải thích định luật Newton thứ hai"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "theme": "Giao diện",
+    "language": "Ngôn ngữ"
+  },
+  "theme": {
+    "switchToDark": "Chế độ Tối",
+    "switchToLight": "Chế độ Sáng"
+  },
+  "conversation": {
+    "rename": "Đổi Tên",
+    "delete": "Xóa",
+    "options": "Tùy chọn"
+  }
 }

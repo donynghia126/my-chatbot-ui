@@ -17,10 +17,11 @@
   --header-border: #e5e7eb; /* Viền header (xám rất nhạt) */
 
   --bubble-user-bg: #aabae8; /* Bubble User (xanh dương) */
-  --bubble-user-text: #ffffff; /* Chữ trong bubble User */
+  --bubble-user-text: #000000; /* Chữ trong bubble User */
   --bubble-ai-bg: #e5e7eb; /* Bubble AI (xám nhạt) */
   --bubble-ai-text: #1f2937; /* Chữ trong bubble AI */
 
+  --input-bgb: #ffffff;
   --input-bg: #ffffff; /* Nền ô input */
   --input-text: #1f2937; /* Chữ trong ô input */
   --input-border: #d1d5db; /* Viền ô input */
@@ -54,6 +55,12 @@
   --markdown-code-block-bg: #1f2937; /* Nền code block (giữ tối cho dễ nhìn code) */
   --markdown-code-block-text: #f3f4f6; /* Chữ code block */
   --markdown-code-block-border: #374151; /* Viền code block */
+
+  /* Sidebar */
+  --sidebar-bg: #f3f4f6; /* Nền sidebar */
+
+  /* Các biến màu khác */
+  --popup-bg: #ffffff; /* Nền pop-up sáng */
 }
 
 /* === Dark Theme Colors (Ghi đè các biến trong :root khi data-theme="dark") === */
@@ -68,10 +75,11 @@ html[data-theme="dark"] {
   --header-border: #3c4043;
 
   --bubble-user-bg: #36383a; /* Giữ nguyên màu xanh hoặc có thể đổi sang xanh sáng hơn */
-  --bubble-user-text: #e8eaed;
+  --bubble-user-text: #000000;
   --bubble-ai-bg: #303134;
   --bubble-ai-text: #e8eaed;
 
+  --input-bgb: #afb1ba; /* Nền ô input tối */
   --input-bg: #303134;
   --input-text: #e8eaed;
   --input-border: #5f6368;
@@ -105,6 +113,12 @@ html[data-theme="dark"] {
   --markdown-code-block-bg: #1e1f20;
   --markdown-code-block-text: #c9d1d9;
   --markdown-code-block-border: #30363d;
+
+  /* Sidebar */
+  --sidebar-bg: #111827; /* Nền sidebar trong dark theme */
+
+  /* Các biến màu khác */
+  --popup-bg: #2d2f34; /* Nền pop-up tối */
 }
 
 html,

@@ -1,17 +1,80 @@
 {
-  "headerTitle": "AI Assistant",
+  "headerTitle": "StudyDony",
   "inputPlaceholder": "Enter your question here...",
   "sendButton": "Send",
   "sendingButton": "Sending...",
-  "loadingAIMessage": "AI Assistant is processing your request...",
+  "loadingAIMessage": "StudyDony AI is processing...",
   "userSender": "You",
-  "aiSender": "AI Assistant",
-  "switchLanguageTo": "Switch to {{lang}}",
+  "aiSender": "StudyDony AI",
   "languages": {
-    "ja": "Japanese",
+    "title": "Language",
     "en": "English",
-    "vi": "Vietnamese"
+    "vi": "Vietnamese",
+    "ja": "Japanese"
   },
-  "errorNetwork": "Network error. Please check the backend.",
-  "errorDefault": "An error occurred. Please try again."
+  "error": {
+    "loadConversation": "Could not load this conversation.",
+    "network": "Network error. Please check your connection.",
+    "default": "An error occurred. Please try again.",
+    "consoleLog": "Error calling API:",
+    "renameConversation": "Could not rename this conversation."
+  },
+  "confirmations": {
+    "deleteSuccess": "Conversation deleted successfully.",
+    "renameSuccess": "Conversation renamed successfully."
+  },
+  "languageSelectorTitle": "Select display language",
+  "themeToggleButtonTitle": "Toggle Light/Dark theme",
+  "welcome": "Welcome",
+  "logoutButton": "Logout",
+  "loginButton": "Login",
+  "registerButton": "Register",
+  "loginPage": {
+    "title": "Login to StudyDony AI",
+    "successMessage": "Login successful!",
+    "loggingInButton": "Logging in...",
+    "loginButton": "Login",
+    "noAccountYet": "Don't have an account?",
+    "registerLink": "Register now"
+  },
+  "registerPage": {
+    "title": "Create StudyDony AI Account",
+    "successMessage": "Account created successfully! Please log in.",
+    "registeringButton": "Registering...",
+    "registerButton": "Register",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginLink": "Login now"
+  },
+  "form": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirmation": "Confirm Password"
+  },
+  "sidebar": {
+    "newChat": "New Conversation",
+    "loading": "Loading..."
+  },
+  "welcomeScreen": {
+    "title": "How can I help you today?",
+    "prompt1": "What is the theory of relativity?",
+    "prompt2": "How to learn vocabulary effectively?",
+    "prompt3": "Summarize the novel \"Chí Phèo\"",
+    "prompt4": "Explain Newton's second law"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "language": "Language"
+  },
+  "theme": {
+    "switchToDark": "Dark Mode",
+    "switchToLight": "Light Mode"
+  },
+  "conversation": {
+    "rename": "Rename",
+    "delete": "Delete",
+    "options": "Options"
+  }
 }

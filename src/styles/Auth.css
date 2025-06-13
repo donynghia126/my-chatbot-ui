@@ -1,0 +1,142 @@
+/* src/styles/Auth.css - File CSS chung cho các trang Đăng nhập, Đăng ký */
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: var(--bg-page);
+}
+/* Thêm vào file src/styles/Auth.css */
+
+/* Đầu tiên, làm cho card có thể chứa phần tử được định vị tuyệt đối */
+.auth-card {
+  position: relative; /* <<-- QUAN TRỌNG: Thêm dòng này */
+  /* ... các style khác của auth-card giữ nguyên ... */
+}
+
+/* Style cho khu vực chứa các nút điều khiển trên trang auth */
+.auth-page-controls {
+  position: absolute; /* Định vị tuyệt đối so với .auth-card */
+  top: 1rem; /* Cách lề trên 1rem */
+  right: 1rem; /* Cách lề phải 1rem */
+}
+
+/* `language-select` sẽ tự động lấy style đã có, không cần thêm gì */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  background-color: var(--bg-app-container);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--header-border);
+}
+
+.auth-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.error-box {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.error-box ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.error-box li {
+  font-size: 0.875rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Khoảng cách giữa các form group */
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-group {
+  flex: 1; /* Cho các group trong row chia đều không gian */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-focus-shadow);
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem; /* Thêm margin top */
+  border-radius: 6px;
+  border: none;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: var(--button-hover-bg);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-switch-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.auth-switch-link a {
+  color: var(--accent-primary, #3b82f6);
+  font-weight: 500;
+  margin-left: 0.25rem;
+  text-decoration: none;
+}
+
+.auth-switch-link a:hover {
+  text-decoration: underline;
+}

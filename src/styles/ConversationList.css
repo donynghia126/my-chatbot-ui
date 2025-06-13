@@ -1,0 +1,405 @@
+/* src/styles/ConversationList.css - Phiên bản cuối cùng, đã được quy hoạch */
+
+/* ---- 1. Layout & Container Chính Của Sidebar ---- */
+.conversation-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0.75rem;
+}
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ---- 2. Nút "New Chat" & Danh Sách Hội Thoại ---- */
+.new-chat-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--text-primary);
+  background-color: transparent;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.new-chat-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--text-primary);
+  background-color: transparent;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.new-chat-button:hover {
+  background-color: var(--button-hover-bg);
+}
+.conversation-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.conversation-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.conversation-item:hover {
+  background-color: var(--button-hover-bg);
+}
+.conversation-item.active {
+  color: var(--bubble-user-text);
+  background-color: var(--bubble-user-bg);
+  font-weight: 600;
+}
+.conversation-title {
+  margin: 0;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  margin-right: 0.5rem;
+}
+.loading-text {
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* ---- 3. Panel Người Dùng & Cài Đặt (Dưới Cùng) ---- */
+.sidebar-bottom {
+  position: relative; /* Quan trọng để định vị menu pop-up */
+  padding-top: 0.75rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--header-border);
+}
+
+.user-panel {
+  position: relative; /* Chứa nút bấm và menu pop-up */
+}
+
+.settings-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  color: inherit;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+.settings-toggle-button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--bubble-user-text);
+  background-color: var(--bubble-user-bg);
+  border-radius: 50%;
+}
+
+.user-welcome-text {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kebab-icon {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+/* Khu vực cho người dùng chưa đăng nhập */
+.auth-links-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem;
+}
+
+/* ---- 4. Menu Pop-up Cài Đặt --- */
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.settings-popup {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  padding: 0.5rem;
+  z-index: 110;
+  color: var(--text-primary);
+  background-color: var(--popup-bg);
+  border: 1px solid var(--header-border);
+  border-radius: 8px;
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transform-origin: bottom left;
+  animation: popup-fade-in 0.15s ease-out forwards;
+}
+
+.popup-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+}
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+.user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.user-email {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--header-border);
+  margin: 0.5rem 0;
+}
+
+/* Style chung cho các mục trong menu cài đặt */
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
+}
+.setting-item:hover {
+  background-color: var(--button-hover-bg);
+}
+.setting-item-label {
+  flex-grow: 1;
+  margin-left: 0.25rem;
+}
+.logout-item {
+  color: var(--button-bg-danger, #dc3545);
+}
+.logout-item:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--button-hover-bg-danger, #c82333);
+}
+
+/* ---- 5. Các Control Tùy Chỉnh Trong Menu Pop-up ---- */
+
+/* Công Tắc Gạt (Toggle Switch) */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--input-border);
+  border-radius: 34px;
+  transition: background-color 0.2s ease;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+input:checked + .slider {
+  background-color: var(--bubble-user-bg);
+}
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Dropdown Ngôn Ngữ Tùy Chỉnh */
+.language-select-custom {
+  position: relative;
+}
+.language-selected-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: var(--input-bgb);
+  border: 1px solid var(--input-border);
+  cursor: pointer;
+}
+.dropdown-arrow {
+  margin-left: auto;
+  font-size: 0.7rem;
+}
+.language-dropdown-menu {
+  position: absolute;
+  bottom: 100%; /* Hiện menu lên trên nút bấm */
+  right: 0; /* Căn phải */
+  list-style: none;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--popup-bg);
+  border: 1px solid var(--header-border);
+  border-radius: 8px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sửa lại shadow cho phù hợp */
+  z-index: 120;
+  width: max-content; /* Độ rộng vừa với nội dung */
+}
+.language-dropdown-menu li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.language-dropdown-menu li:hover {
+  background-color: var(--button-hover-bg);
+}
+
+/* ---- 6. Menu "..." cho mỗi Conversation Item ---- */
+.conversation-options {
+  position: relative;
+  flex-shrink: 0;
+}
+.options-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  line-height: 1;
+}
+.options-button:hover {
+  background-color: var(--button-hover-bg);
+}
+.options-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--popup-bg);
+  border: 1px solid var(--header-border);
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 130;
+  padding: 0.5rem;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+}
+.options-menu .menu-item {
+  width: 100%;
+  padding: 0.5rem;
+  text-align: left;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+.options-menu .menu-item:hover {
+  background-color: var(--button-hover-bg);
+}
+.options-menu .menu-item.danger {
+  color: var(--button-bg-danger, #dc3545);
+}
+.options-menu .menu-item.danger:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--button-hover-bg-danger, #c82333);
+}
+.options-menu .menu-item:disabled {
+  color: var(--text-placeholder);
+  cursor: not-allowed;
+  background: none;
+}
+
+/* ---- 7. Hiệu Ứng Khi Thu Gọn Sidebar ---- */
+.sidebar-closed .sidebar-text,
+.sidebar-closed .conversation-title,
+.sidebar-closed .kebab-icon {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease, visibility 0s linear 0.1s;
+}
+.sidebar-closed .settings-toggle-button {
+  justify-content: center;
+}
